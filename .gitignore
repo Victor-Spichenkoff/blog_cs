@@ -1,0 +1,27 @@
+# Build results
+bin/
+obj/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Dotnet-specific
+*.pidb
+*.dotnet_tool
+
+# VS Code
+.vscode/
+
+# Rider IDE
+.idea/
+*.sln.iml
+
+# Entity Framework Migrations
+Migrations/
+
+# Logs
+*.log

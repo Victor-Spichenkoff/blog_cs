@@ -3,24 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Pichau\\Projects\\blog_c#\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{62A39D07-006F-4EA7-8494-E0F841C15E08}|blog_c#.csproj|c:\\users\\pichau\\projects\\blog_c#\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{62A39D07-006F-4EA7-8494-E0F841C15E08}|blog_c#.csproj|solutionrelative:.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+      "AbsoluteMoniker": "D:0:0:{62A39D07-006F-4EA7-8494-E0F841C15E08}|blog_c#.csproj|c:\\users\\pichau\\projects\\blog_c#\\migrations\\20241024002538_initialcreation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62A39D07-006F-4EA7-8494-E0F841C15E08}|blog_c#.csproj|solutionrelative:migrations\\20241024002538_initialcreation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{62A39D07-006F-4EA7-8494-E0F841C15E08}|blog_c#.csproj|c:\\users\\pichau\\projects\\blog_c#\\blog_c#.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{62A39D07-006F-4EA7-8494-E0F841C15E08}|blog_c#.csproj|solutionrelative:blog_c#.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{62A39D07-006F-4EA7-8494-E0F841C15E08}|blog_c#.csproj|c:\\users\\pichau\\projects\\blog_c#\\data\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{62A39D07-006F-4EA7-8494-E0F841C15E08}|blog_c#.csproj|solutionrelative:data\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{62A39D07-006F-4EA7-8494-E0F841C15E08}|blog_c#.csproj|c:\\users\\pichau\\projects\\blog_c#\\migrations\\datacontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62A39D07-006F-4EA7-8494-E0F841C15E08}|blog_c#.csproj|solutionrelative:migrations\\datacontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{62A39D07-006F-4EA7-8494-E0F841C15E08}|blog_c#.csproj|c:\\users\\pichau\\projects\\blog_c#\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{62A39D07-006F-4EA7-8494-E0F841C15E08}|blog_c#.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{62A39D07-006F-4EA7-8494-E0F841C15E08}|blog_c#.csproj|c:\\users\\pichau\\projects\\blog_c#\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{62A39D07-006F-4EA7-8494-E0F841C15E08}|blog_c#.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,82 +22,66 @@
       "DocumentGroups": [
         {
           "DockedHeight": 380,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 5,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1189162011:0:{bf84ea66-d821-4dba-b1b1-2777d8574775}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{fabf9319-47eb-497e-b8f6-d9f73fba5f55}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{fabf9319-47eb-497e-b8f6-d9f73fba5f55}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1189563226:0:{bf84ea66-d821-4dba-b1b1-2777d8574775}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": ".gitignore",
-              "DocumentMoniker": "C:\\Users\\Pichau\\Projects\\blog_c#\\.gitignore",
-              "RelativeDocumentMoniker": ".gitignore",
-              "ToolTip": "C:\\Users\\Pichau\\Projects\\blog_c#\\.gitignore",
-              "RelativeToolTip": ".gitignore",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001407|",
-              "WhenOpened": "2024-10-11T00:45:36.238Z",
+              "Title": "20241024002538_InitialCreation.cs",
+              "DocumentMoniker": "C:\\Users\\Pichau\\Projects\\blog_c#\\Migrations\\20241024002538_InitialCreation.cs",
+              "RelativeDocumentMoniker": "Migrations\\20241024002538_InitialCreation.cs",
+              "ToolTip": "C:\\Users\\Pichau\\Projects\\blog_c#\\Migrations\\20241024002538_InitialCreation.cs",
+              "RelativeToolTip": "Migrations\\20241024002538_InitialCreation.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAADwvxIAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-24T00:38:05.456Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "blog_c#",
-              "DocumentMoniker": "C:\\Users\\Pichau\\Projects\\blog_c#\\blog_c#.csproj",
-              "RelativeDocumentMoniker": "blog_c#.csproj",
-              "ToolTip": "C:\\Users\\Pichau\\Projects\\blog_c#\\blog_c#.csproj",
-              "RelativeToolTip": "blog_c#.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-10-11T00:39:18.983Z",
+              "Title": "DataContextModelSnapshot.cs",
+              "DocumentMoniker": "C:\\Users\\Pichau\\Projects\\blog_c#\\Migrations\\DataContextModelSnapshot.cs",
+              "RelativeDocumentMoniker": "Migrations\\DataContextModelSnapshot.cs",
+              "ToolTip": "C:\\Users\\Pichau\\Projects\\blog_c#\\Migrations\\DataContextModelSnapshot.cs",
+              "RelativeToolTip": "Migrations\\DataContextModelSnapshot.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAA4wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-24T00:37:58.406Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "DataContext.cs",
-              "DocumentMoniker": "C:\\Users\\Pichau\\Projects\\blog_c#\\Data\\DataContext.cs",
-              "RelativeDocumentMoniker": "Data\\DataContext.cs",
-              "ToolTip": "C:\\Users\\Pichau\\Projects\\blog_c#\\Data\\DataContext.cs",
-              "RelativeToolTip": "Data\\DataContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-10T22:01:31.202Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Pichau\\Projects\\blog_c#\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\Pichau\\Projects\\blog_c#\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-10-10T21:54:45.721Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Pichau\\Projects\\blog_c#\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\Pichau\\Projects\\blog_c#\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAwA8AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABAAAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-08T15:36:48.633Z",
               "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedHeight": 20,
-          "SelectedChildIndex": -1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             }
           ]
         }

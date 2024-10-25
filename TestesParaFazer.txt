@@ -1,0 +1,16 @@
+- Testar as mensagens de erro passsado no model
+
+- Post tem title como UNIQUE
+
+
+****************************
+USER
+
+- Senha deve ter 5 caracteres + 
+- User tem emial como UNIQUE
+
+
+
+
+- Relacionamentos n-n
+- Como tirar/colocar mais itens

@@ -1,3 +1,4 @@
+using blog_c_.Configurations;
 using blog_c_.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Xml.Linq;
@@ -18,6 +19,11 @@ builder.Services.AddDbContext<DataContext>(options => {
 });
 
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -33,4 +39,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.MigrateDatabase();
 app.Run();

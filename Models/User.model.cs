@@ -7,6 +7,7 @@ namespace blog_c_.Models;
 public class User
 {
     [Required(ErrorMessage = "Campo obrigátorio")]
+    [Key]
     public long Id { get; set; }
 
     [Required]
@@ -16,7 +17,7 @@ public class User
     public required string Email { get; set; }
 
     [Required]
-    [MinLength(5)]
+    [MinLength(5, ErrorMessage = "Senha deve ter 5 caracteres")]
     public required string Password { get; set; }
 
 

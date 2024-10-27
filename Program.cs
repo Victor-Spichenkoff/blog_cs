@@ -1,7 +1,8 @@
 using blog_c_.Configurations;
 using blog_c_.Data;
+using blog_c_.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Xml.Linq;
+using blog_c_.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,9 +19,21 @@ builder.Services.AddDbContext<DataContext>(options => {
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-
+// mapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+// DI
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+
+// erro do ciclo
+builder.Services.AddControllers()
+      .AddNewtonsoftJson(o => o.SerializerSettings.ReferenceLoopHandling =
+       Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+//builder.Services.AddControllers().AddJsonOptions(options =>
+//{
+//    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+//});
 
 
 

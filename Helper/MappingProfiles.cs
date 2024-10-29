@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using blog_c_.DTOs;
+using blog_c_.DTOs.FilterDtos;
+using blog_c_.DTOs.ModifyDtos;
 using blog_c_.Models;
-using System.Diagnostics.Metrics;
 
 namespace blog_c_.Helper;
 
@@ -9,8 +10,10 @@ public class MappingProfiles : Profile
 {
     public MappingProfiles()
     {
-        // Recebe, ´saída
+        // Recebe, saída
         CreateMap<CreationUserDto, User>().ReverseMap();
+        CreateMap<User, FilterUserDto>().ReverseMap();
         CreateMap<User, FullUserDto>();
+        CreateMap<Post, FilterPostDto>().ReverseMap();
     }
 }

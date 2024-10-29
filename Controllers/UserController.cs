@@ -1,4 +1,4 @@
-﻿using blog_c_.DTOs;
+﻿using blog_c_.DTOs.ModifyDtos;
 using blog_c_.Interfaces;
 using blog_c_.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -25,6 +25,21 @@ public class UserController(IUserRepository ur): Controller
 
         return Ok(res);
     }
+
+
+    [HttpGet("{id}")]
+    [ProducesResponseType(typeof(ICollection<User>), 200)]
+    [ProducesResponseType(404)]
+    public IActionResult GetById(long id)
+    {
+        var res = _ur.GetById(id);
+
+        if (res == null)
+            return NotFound();
+
+        return Ok(res);
+    }
+
 
     [HttpGet("/all/{id}")]
     [ProducesResponseType(typeof (User), 200)]

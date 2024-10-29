@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using blog_c_.Data;
-using blog_c_.DTOs;
+using blog_c_.DTOs.FilterDtos;
+using blog_c_.DTOs.ModifyDtos;
 using blog_c_.Interfaces;
 using blog_c_.Models;
 using Microsoft.EntityFrameworkCore;
@@ -13,9 +14,18 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
     private readonly DataContext _context = context;
     private readonly IMapper _mapper = mapper;
 
-    public User GetById(long id)
+    public bool CreateUser(CreationUserDto user)
     {
         throw new NotImplementedException();
+    }
+
+    public FilterUserDto? GetById(long id)
+    {
+        return _mapper.Map<FilterUserDto>(
+            _context.Users
+            .Where(p => p.Id == id)
+            .FirstOrDefault()
+            );
     }
 
     public User GetFullUser(long id)
@@ -44,5 +54,11 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
         return [.. _context.Users
             .AsNoTracking() ];// não vai modificar, isso dá mais desempenho
             
+    }
+
+    public bool UserExists(long id)
+    {
+        var res = _context.Users.Where(u => u.Id == id).FirstOrDefault();
+        return res != null;
     }
 }

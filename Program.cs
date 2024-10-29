@@ -24,6 +24,8 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // DI
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IPostRepositoy, PostRepository>();
+builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 
 
 // erro do ciclo

@@ -14,3 +14,11 @@ USER
 
 - Relacionamentos n-n
 - Como tirar/colocar mais itens
+
+
+
+
+## TODO
+- Implementar todos os GET, exportar para o insomnia
+- Terminar de criar o CreateUser
+- Está ficando bem grande a consulta curso, pega 2 vezes o CoursesUsers

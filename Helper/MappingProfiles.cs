@@ -12,6 +12,7 @@ public class MappingProfiles : Profile
     {
         // Recebe, saída
         CreateMap<CreationUserDto, User>().ReverseMap();
+        CreateMap<CreationUserMessageDto, User>().ReverseMap();
         CreateMap<User, FilterUserDto>().ReverseMap();
         CreateMap<User, FullUserDto>();
         CreateMap<Post, FilterPostDto>().ReverseMap();

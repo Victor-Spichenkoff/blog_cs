@@ -1,15 +1,18 @@
-﻿using blog_c_.DTOs.ModifyDtos;
+﻿using AutoMapper;
+using blog_c_.DTOs.FilterDtos;
+using blog_c_.DTOs.ModifyDtos;
 using blog_c_.Interfaces;
 using blog_c_.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace blog_c_.Controllers;
 
 [ApiController]
 [Route("/user")]
-public class UserController(IUserRepository ur): Controller
+public class UserController(IUserRepository ur, IMapper mapper): Controller
 {
     private readonly IUserRepository _ur = ur;
 
@@ -69,5 +72,35 @@ public class UserController(IUserRepository ur): Controller
             return StatusCode(404, "User inexistente");
 
         return Ok(user);
+    }
+
+    [HttpPost]
+    [ProducesResponseType(200)]
+    public IActionResult CreateUser([FromBody] CreationUserMessageDto user)
+    {
+        if (user == null)
+            return BadRequest("Envie um usuário");
+
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        try
+        {
+            var mappedUser = mapper.Map<User>(user);
+
+            var createdUser = _ur.CreateUser(mappedUser);
+
+            if (createdUser == null)
+                return StatusCode(500, "Erro interno");
+
+            var filteredUser = mapper.Map<FilterUserDto>(createdUser);
+
+            return Ok(createdUser);
+        } catch
+        {
+            return BadRequest("Email já usado");
+        }
     }
 }

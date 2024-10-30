@@ -18,9 +18,22 @@ public class CourseRepository(DataContext context) : ICourseRepository
 
     public ICollection<Course> GetCourses()
     {
-        return [.. _context.Courses
+        return _context.Courses
             .Include(c => c.CoursesUsers)
-            .ThenInclude(c => c.User)
+            .ToList();  
+    }
+
+    public ICollection<User>? GetCourseUsers(long courseId)
+    {
+        return [.. _context.CoursesUsers
+                .AsNoTracking()
+                .Where(cu => cu.CourseId == courseId)
+                .Select(cu => cu.User)
             ];
+    }
+
+    public bool CreateCourse(Course course)
+    {
+        throw new NotImplementedException();
     }
 }

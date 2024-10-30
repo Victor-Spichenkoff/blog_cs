@@ -14,9 +14,12 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
     private readonly DataContext _context = context;
     private readonly IMapper _mapper = mapper;
 
-    public bool CreateUser(CreationUserDto user)
+    public User? CreateUser(User user)
     {
-        throw new NotImplementedException();
+        _context.Add(user);
+
+        _context.SaveChanges();
+        return user;
     }
 
     public FilterUserDto? GetById(long id)
@@ -60,5 +63,15 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
     {
         var res = _context.Users.Where(u => u.Id == id).FirstOrDefault();
         return res != null;
+    }
+
+    public bool UpdateUser(CreationUserMessageDto user)
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool DeleteUser(long id)
+    {
+        throw new NotImplementedException();
     }
 }

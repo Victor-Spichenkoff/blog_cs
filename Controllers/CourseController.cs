@@ -1,8 +1,5 @@
-﻿using AutoMapper;
-using blog_c_.DTOs.FilterDtos;
-using blog_c_.Interfaces;
+﻿using blog_c_.Interfaces;
 using blog_c_.Models;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace blog_c_.Controllers;
@@ -36,6 +33,20 @@ public class CourseController(ICourseRepository cr) : Controller
 
         if (res == null)
             return NotFound("Curso não encontrado");
+
+        return Ok(res);
+    }
+
+
+    [HttpGet("/course/{courseId:long}/users")]
+    [ProducesResponseType(typeof(ICollection<User>), 200)]
+    [ProducesResponseType(404)]
+    public IActionResult GetUsersFromCourse(long courseId)
+    {
+        var res = _cr.GetCourseUsers(courseId);
+
+        if (res == null || res.Count == 0)
+            return NotFound("Curso não encontrado e/ou curso sem usuários");
 
         return Ok(res);
     }

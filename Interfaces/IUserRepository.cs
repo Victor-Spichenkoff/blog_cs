@@ -12,6 +12,8 @@ public interface IUserRepository
 
     User GetFullUser(long id);
     CreationUserDto GetHomeUser(long id);
-    bool CreateUser(CreationUserDto user);
+    User? CreateUser(User user);
     bool UserExists(long id);
+    bool UpdateUser(CreationUserMessageDto user);
+    bool DeleteUser(long id);
 }

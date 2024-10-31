@@ -1,4 +1,5 @@
 ﻿using blog_c_.DTOs.FilterDtos;
+using blog_c_.DTOs.ModifyDtos;
 using blog_c_.Models;
 
 namespace blog_c_.Interfaces;
@@ -11,4 +12,6 @@ public interface IPostRepositoy
     public Post? GetPostById(long id);
 
     public ICollection<Post>? GetPostsFromUser(long userId);
+    public void GiveLike(long id);
+    public bool CreatePost(Post post);
 }

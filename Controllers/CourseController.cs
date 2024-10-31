@@ -1,4 +1,7 @@
-﻿using blog_c_.Interfaces;
+﻿using AutoMapper;
+using blog_c_.DTOs.ModifyDtos;
+using blog_c_.Erros;
+using blog_c_.Interfaces;
 using blog_c_.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,9 +9,10 @@ namespace blog_c_.Controllers;
 
 [ApiController]
 [Route("course")]
-public class CourseController(ICourseRepository cr) : Controller
+public class CourseController(ICourseRepository cr, IMapper m) : Controller
 {
     private readonly ICourseRepository _cr = cr;
+    private readonly IMapper _mapper = m;
 
     // FY
     [HttpGet]
@@ -49,5 +53,65 @@ public class CourseController(ICourseRepository cr) : Controller
             return NotFound("Curso não encontrado e/ou curso sem usuários");
 
         return Ok(res);
+    }
+
+
+    [HttpPost]
+    [ProducesResponseType(203)]
+    public IActionResult CreateCourse([FromBody] CreationCourseDto? course)
+    {
+        try
+        {
+            if (course == null)
+                return BadRequest("Passe um curso");
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var mappedCourse = _mapper.Map<Course>(course);
+            
+            var success = _cr.CreateCourse(mappedCourse);
+
+            if (!success)
+                return StatusCode(500, "Algo deu errado");
+
+
+            return Created();
+        }
+        catch (GenericDbError error)
+        {
+            return StatusCode(500, error.Message);
+        }
+        catch
+        {
+            return StatusCode(500, "Erro interno");
+        }
+    }
+
+
+    [HttpPatch("/course/{courseId}/user")]
+    [ProducesResponseType(203)]
+    public IActionResult AddUserToCourse([FromQuery] long userId, long courseId)
+    {
+        if (userId == 0 || courseId == 0)
+            return BadRequest("Passe um ID válido");
+
+        try
+        {
+            var success = _cr.AddUserToCourse(courseId, userId);
+
+            if (!success)
+                return BadRequest("Não foi possível salvar");
+
+            return Created();
+        }
+        catch (GenericDbError error)
+        {
+            return BadRequest(error.Message);
+        }
+        catch
+        {
+            return BadRequest("Erro interno");
+        }
     }
 }

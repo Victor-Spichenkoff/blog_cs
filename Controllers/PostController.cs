@@ -1,4 +1,7 @@
-﻿using blog_c_.DTOs.FilterDtos;
+﻿using AutoMapper;
+using blog_c_.DTOs.FilterDtos;
+using blog_c_.DTOs.ModifyDtos;
+using blog_c_.Erros;
 using blog_c_.Interfaces;
 using blog_c_.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -7,10 +10,11 @@ namespace blog_c_.Controllers;
 
 [ApiController]
 [Route("/post")]
-public class PostController(IPostRepositoy pr, IUserRepository ur) : Controller
+public class PostController(IPostRepositoy pr, IUserRepository ur, IMapper m) : Controller
 {
     private readonly IPostRepositoy _pr = pr;
     private readonly IUserRepository _userRepository = ur;
+    private readonly IMapper _mapper = m;
 
     // FY
     [HttpGet]
@@ -57,5 +61,54 @@ public class PostController(IPostRepositoy pr, IUserRepository ur) : Controller
             return NotFound("Usuário não tem posts");
 
         return Ok(posts);
+    }
+
+
+    [HttpGet("/post/{postId}/like")]
+    [ProducesResponseType(203)]
+    public IActionResult GiveLike(long postId)
+    {
+        try
+        {
+            _pr.GiveLike(postId);
+            return StatusCode(203);
+        }
+        catch (GenericDbError error)
+        {
+            return BadRequest(error.Message);
+        }
+        catch
+        {
+            return BadRequest("Erro inesperado");
+        }
+    }
+
+
+    [HttpPost]
+    [ProducesResponseType(203)]
+    public IActionResult CreatePost([FromBody] CreationPostDto post)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var mappedPost = _mapper.Map<Post>(post);
+
+        try
+        {
+            var success = _pr.CreatePost(mappedPost);
+
+            if (!success)
+                return BadRequest("Erro ao criar Post");
+
+            return Created();
+        }
+        catch (GenericDbError error)
+        {
+            return BadRequest(error.Message);
+        }
+        catch
+        {
+            return BadRequest("Algo deu errado");
+        }
     }
 }

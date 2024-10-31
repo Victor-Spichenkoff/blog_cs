@@ -12,11 +12,15 @@ public class Post
     [MaxLength(100, ErrorMessage = "Deve ter menos de 100 caracteres")]
     public string Title { get; set; } = string.Empty;
 
+    
     [Required(ErrorMessage = "Crie um corpo")]
-    public string Body { get; set; } = String.Empty;
+    [MaxLength(100, ErrorMessage = "Corpo deve ter menos de 100 caracteres")]
+    public required string Body { get; set; }
+    
     public int Likes { get; set; } = 0;
 
+    
     [ForeignKey(nameof(User))]
-    public long UserId { get; set; }
-    public User User { get; set; }
+    public long UserId { get; set;  }
+    public required User User { get; set; } 
 }

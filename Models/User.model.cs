@@ -11,10 +11,10 @@ public class User
     public long Id { get; set; }
 
     [Required]
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
     [Required]
-    public required string Email { get; set; }
+    public string? Email { get; set; }
 
     [Required]
     [MinLength(5, ErrorMessage = "Senha deve ter 5 caracteres")]

@@ -1,16 +1,19 @@
 ﻿using AutoMapper;
 using blog_c_.Data;
 using blog_c_.DTOs.FilterDtos;
+using blog_c_.DTOs.ModifyDtos;
+using blog_c_.Erros;
 using blog_c_.Interfaces;
 using blog_c_.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace blog_c_.Repositories;
 
-public class PostRepository(DataContext ctx, IMapper m) : IPostRepositoy
+public class PostRepository(DataContext ctx, IMapper m, IUserRepository ur) : IPostRepositoy
 {
     private readonly IMapper _mapper = m;
     private readonly DataContext _context = ctx;
+    private readonly IUserRepository _userRepository = ur;
 
     // pegar 1
     public Post? GetPostById(long id)
@@ -41,4 +44,26 @@ public class PostRepository(DataContext ctx, IMapper m) : IPostRepositoy
             .Include(p =>p.User)
             ];
     }
+
+    public void GiveLike(long id)
+    {
+        var post = GetPostById(id);
+        if (post == null)
+            throw new GenericDbError("Post não encontrado");
+        
+        post.Likes += 1;
+        _context.Posts.Update(post);
+        _context.SaveChanges();
+    }
+
+    public bool CreatePost(Post post)
+    {
+        if (!_userRepository.UserExists(post.UserId))
+            throw new GenericDbError("Usuário inexistente");
+            
+        _context.Posts.Add(post);
+
+        return _context.SaveChanges() > 0;
+    }
+
 }

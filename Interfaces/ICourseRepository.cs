@@ -8,5 +8,6 @@ public interface ICourseRepository
     public ICollection<Course> GetCourses();
     public ICollection<User>? GetCourseUsers(long id);
     public bool CreateCourse(Course course);
-    
+    public bool AddUserToCourse(long courseId, long userId);
+    public bool CourseExists(long id);
 }

@@ -69,26 +69,29 @@ public class Seeding(DataContext context)
 
         _context.Posts.AddRange
             (
-                new Post()
+                new Post
                 {
                     Id = 1,
                     Title = "Olá, Mundo!",
                     Body = "Código default",
-                    UserId = 1
+                    UserId = 1,
+                    User = null
                 },
-                new Post()
+                new Post
                 {
                     Id = 2,
                     Title = "Texto 2!",
                     Body = "Código default 2",
-                    UserId = 1
+                    UserId = 1,
+                    User = null
                 },
-                new Post()
+                new Post
                 {
                     Id = 3,
                     Title = "tesstando 3",
                     Body = "Código default 3",
-                    UserId = 2
+                    UserId = 2,
+                    User = null
                 }
             );
     }

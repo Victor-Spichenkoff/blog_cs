@@ -103,7 +103,7 @@ public class CourseController(ICourseRepository cr, IMapper m) : Controller
             if (!success)
                 return BadRequest("Não foi possível salvar");
 
-            return Created();
+            return NoContent();
         }
         catch (GenericDbError error)
         {
@@ -112,6 +112,31 @@ public class CourseController(ICourseRepository cr, IMapper m) : Controller
         catch
         {
             return BadRequest("Erro interno");
+        }
+    }
+
+
+    [HttpPatch("{courseId}")]
+    [ProducesResponseType(typeof(ICollection<Course>), 200)]
+    public IActionResult UpdateCourse(long courseId, [FromBody] UpdateCourseDto? course)
+    {
+        if (courseId == 0 || course == null)
+            return BadRequest("Mande todas as informações");
+
+        try
+        {
+            var newCourse = _cr.UpdateCourse(courseId, course);
+
+            return Ok(newCourse);
+        }
+        catch (GenericDbError error)
+        {
+            return BadRequest(error.Message);
+        }
+        catch(Exception error)
+        {
+            Console.WriteLine(error.Message + "\n\n\nErro ao atualizar curso");
+            return BadRequest("Erro interno!");
         }
     }
 }

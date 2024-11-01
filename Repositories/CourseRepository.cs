@@ -1,4 +1,5 @@
 ﻿using blog_c_.Data;
+using blog_c_.DTOs.ModifyDtos;
 using blog_c_.Erros;
 using blog_c_.Interfaces;
 using blog_c_.Models;
@@ -67,4 +68,29 @@ public class CourseRepository(DataContext context, IUserRepository ur) : ICourse
     }
 
     public bool CourseExists(long id) => _context.Courses.Any(c => c.Id == id);
+    
+    public Course? UpdateCourse(long courseId, UpdateCourseDto course)
+    {
+        var dbCourse = _context.Courses
+            .FirstOrDefault(c => c.Id == courseId);
+            
+
+        if (dbCourse == null)
+            throw new GenericDbError("Curso inexistente");
+
+        if (!string.IsNullOrEmpty(course.Name))
+            dbCourse.Name = course.Name;        
+        
+        if (!string.IsNullOrEmpty(course.Description))
+            dbCourse.Description = course.Description;
+
+        var success = _context.SaveChanges() > 0;
+
+        var dbStatus = _context.Entry(dbCourse).State; 
+        
+        if (!success)
+            throw new GenericDbError("Nada para atualizar");
+
+        return dbCourse;
+    }
 }

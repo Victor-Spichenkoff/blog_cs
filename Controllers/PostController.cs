@@ -111,4 +111,29 @@ public class PostController(IPostRepositoy pr, IUserRepository ur, IMapper m) : 
             return BadRequest("Algo deu errado");
         }
     }
+
+
+    [HttpPatch("{postId}")]
+    [ProducesResponseType(typeof(FilterPostDto), 200)]
+    public IActionResult UpdatePost(long postId, [FromBody] UpdatePostDto? post)
+    {
+        if (post is null)
+            return BadRequest("Escreva algo");
+
+        try
+        {
+            var newPost = _pr.UpdatePost(postId, post);
+
+            return Ok(newPost);
+        }
+        catch (GenericDbError error)
+        {
+            return BadRequest(error.Message);
+        }
+        catch(Exception error)
+        {
+            Console.WriteLine(error + "\n\n\nErro ao atualizar Post");
+            return BadRequest("Erro interno!");
+        }
+    }
 }

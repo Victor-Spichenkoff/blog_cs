@@ -83,7 +83,7 @@ public class Seeding(DataContext context)
                     Title = "Texto 2!",
                     Body = "Código default 2",
                     UserId = 1,
-                    User = null
+                    User = null,
                 },
                 new Post
                 {

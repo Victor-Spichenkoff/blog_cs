@@ -14,4 +14,5 @@ public interface IPostRepositoy
     public ICollection<Post>? GetPostsFromUser(long userId);
     public void GiveLike(long id);
     public bool CreatePost(Post post);
+    public Post? UpdatePost(long postId, UpdatePostDto post);
 }

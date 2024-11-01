@@ -8,7 +8,10 @@ USER
 
 - Senha deve ter 5 caracteres + 
 - User tem emial como UNIQUE
-
+- Update
+    - Criar email e senha
+    - Ver ele salva de forma livre
+    - Ver com email no formato errado
 
 
 
@@ -21,4 +24,4 @@ USER
 ## TODO
 - Implementar todos os GET, exportar para o insomnia
 - Terminar de criar o CreateUser
-- Está ficando bem grande a consulta curso, pega 2 vezes o CoursesUsers
+- Estï¿½ ficando bem grande a consulta curso, pega 2 vezes o CoursesUsers

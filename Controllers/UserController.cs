@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using blog_c_.DTOs.FilterDtos;
 using blog_c_.DTOs.ModifyDtos;
+using blog_c_.Erros;
 using blog_c_.Interfaces;
 using blog_c_.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -12,7 +13,7 @@ namespace blog_c_.Controllers;
 
 [ApiController]
 [Route("/user")]
-public class UserController(IUserRepository ur, IMapper mapper): Controller
+public class UserController(IUserRepository ur, IMapper mapper) : Controller
 {
     private readonly IUserRepository _ur = ur;
 
@@ -45,13 +46,13 @@ public class UserController(IUserRepository ur, IMapper mapper): Controller
 
 
     [HttpGet("/all/{id}")]
-    [ProducesResponseType(typeof (User), 200)]
+    [ProducesResponseType(typeof(User), 200)]
     [ProducesResponseType(404)]
     public IActionResult GetFullUserData(long id)
     {
         var user = _ur.GetFullUser(id);
 
-        if(user == null)
+        if (user == null)
             return NotFound();
 
         return Ok(user);
@@ -63,7 +64,7 @@ public class UserController(IUserRepository ur, IMapper mapper): Controller
     [ProducesResponseType(404)]
     public IActionResult GetHomeUserData(long id)
     {
-        if(id < 1)
+        if (id < 1)
             return BadRequest();
 
         var user = _ur.GetHomeUser(id);
@@ -98,9 +99,60 @@ public class UserController(IUserRepository ur, IMapper mapper): Controller
             var filteredUser = mapper.Map<FilterUserDto>(createdUser);
 
             return Ok(createdUser);
-        } catch
+        }
+        catch
         {
             return BadRequest("Email já usado");
+        }
+    }
+
+    [HttpPatch("{userId}")]
+    [ProducesResponseType(typeof(FilterUserDto), 200)]
+    [ProducesResponseType(4004)]
+    public IActionResult UpdateUser([FromBody] UpdateUserDto? user, long userId)
+    {
+        if (user == null)
+            return BadRequest("Informe algum dado");
+
+        try
+        {
+            var newUser = _ur.UpdateUser(userId, user);
+
+            return Ok(newUser);
+        }
+        catch (GenericDbError error)
+        {
+            return BadRequest(error.Message);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message, "Erro ao update user");
+
+            return BadRequest("Erro interno");
+        }
+    }
+
+    [HttpDelete("{userId}")]
+    [ProducesResponseType(203)]
+    public IActionResult DeleteUser(long userId)
+    {
+        try
+        {
+            var success = _ur.DeleteUser(userId);
+
+            if (!success)
+                return BadRequest("Erro ao delete usuário");
+            
+            return NoContent();
+        }
+        catch (GenericDbError error)
+        {
+            return BadRequest(error.Message);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message, "\n\n\n\nErro ao deletar user");
+            return BadRequest("Erro interno");
         }
     }
 }

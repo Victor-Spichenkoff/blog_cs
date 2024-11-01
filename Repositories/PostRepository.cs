@@ -66,4 +66,34 @@ public class PostRepository(DataContext ctx, IMapper m, IUserRepository ur) : IP
         return _context.SaveChanges() > 0;
     }
 
+    public Post? UpdatePost(long postId, UpdatePostDto post)
+    {
+        var dbPost = _context.Posts
+            .Where(p => p.Id == postId)
+
+            .FirstOrDefault();
+
+        if (dbPost == null)
+            throw new GenericDbError("Post não encontrado");
+
+        if (!string.IsNullOrEmpty(post.Title))
+        {
+            if (_context.Posts.Any(p => p.Title == post.Title))
+                throw new GenericDbError("Email já usado");
+
+            dbPost.Title = post.Title;
+        }
+
+        if (!string.IsNullOrEmpty(dbPost.Body) && post?.Body?.Length > 4)
+        {
+            dbPost.Body = post.Body;
+        }
+
+        var success = _context.SaveChanges() > 0;
+
+        if (!success)
+            throw new GenericDbError("Nada para atualizar");
+
+        return dbPost;
+    }
 }

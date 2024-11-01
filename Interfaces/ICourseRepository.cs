@@ -1,4 +1,5 @@
-﻿using blog_c_.Models;
+﻿using blog_c_.DTOs.ModifyDtos;
+using blog_c_.Models;
 
 namespace blog_c_.Interfaces;
 
@@ -10,4 +11,5 @@ public interface ICourseRepository
     public bool CreateCourse(Course course);
     public bool AddUserToCourse(long courseId, long userId);
     public bool CourseExists(long id);
+    public Course? UpdateCourse(long courseId, UpdateCourseDto course);
 }

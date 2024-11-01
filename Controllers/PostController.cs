@@ -4,6 +4,7 @@ using blog_c_.DTOs.ModifyDtos;
 using blog_c_.Erros;
 using blog_c_.Interfaces;
 using blog_c_.Models;
+using blog_c_.Models.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace blog_c_.Controllers;
@@ -19,9 +20,9 @@ public class PostController(IPostRepositoy pr, IUserRepository ur, IMapper m) : 
     // FY
     [HttpGet]
     [ProducesResponseType(typeof(ICollection<FilterPostDto>), 200)]
-    public IActionResult GetFy([FromQuery] int page)
+    public IActionResult GetFy([FromQuery] PaginationQuery paginationItens)
     {
-        var posts = _pr.GetPosts(page);
+        var posts = _pr.GetPosts(paginationItens.Page, paginationItens.PageSize);
 
         if (posts.Count == 0)
             return BadRequest("Isso é tudo pessoal...");
@@ -130,10 +131,37 @@ public class PostController(IPostRepositoy pr, IUserRepository ur, IMapper m) : 
         {
             return BadRequest(error.Message);
         }
-        catch(Exception error)
+        catch (Exception error)
         {
             Console.WriteLine(error + "\n\n\nErro ao atualizar Post");
             return BadRequest("Erro interno!");
+        }
+    }
+
+    [HttpDelete("{postId}")]
+    [ProducesResponseType(204)]
+    public IActionResult DeletePost(long postId)
+    {
+        if (postId < 1)
+            return BadRequest("Passe um ID válido");
+
+        try
+        {
+            var success = _pr.DeletePost(postId);
+
+            if (!success)
+                return BadRequest("Não foi possível salvar");
+
+            return NoContent();
+        }
+        catch (GenericDbError error)
+        {
+            return BadRequest(error.Message);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return BadRequest("Erro interno");
         }
     }
 }

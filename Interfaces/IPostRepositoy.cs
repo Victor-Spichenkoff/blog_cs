@@ -15,4 +15,5 @@ public interface IPostRepositoy
     public void GiveLike(long id);
     public bool CreatePost(Post post);
     public Post? UpdatePost(long postId, UpdatePostDto post);
+    public bool DeletePost(long postId);
 }

@@ -93,4 +93,22 @@ public class CourseRepository(DataContext context, IUserRepository ur) : ICourse
 
         return dbCourse;
     }
+
+    public void DeleteCourse(long courseId)
+    {
+        var couse = _context.Courses
+            .Include(c => c.CoursesUsers)
+            .FirstOrDefault(c => c.Id == courseId);
+        
+        if(couse == null)
+            throw new GenericDbError("Curso inexistente");
+
+        
+        // apgar relações
+        couse.CoursesUsers?.Clear();
+        _context.Remove(couse);
+        var success = _context.SaveChanges() > 0;
+        if (!success)
+            throw new GenericDbError("Não foi possível exlcuir");
+    }
 }

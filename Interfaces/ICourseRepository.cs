@@ -12,4 +12,5 @@ public interface ICourseRepository
     public bool AddUserToCourse(long courseId, long userId);
     public bool CourseExists(long id);
     public Course? UpdateCourse(long courseId, UpdateCourseDto course);
+    public void DeleteCourse(long courseId);
 }

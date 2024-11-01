@@ -25,3 +25,4 @@ USER
 - Implementar todos os GET, exportar para o insomnia
 - Terminar de criar o CreateUser
 - Est� ficando bem grande a consulta curso, pega 2 vezes o CoursesUsers
+- Como apagar um curso/user relacionado a uum CouseUser

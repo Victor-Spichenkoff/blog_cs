@@ -87,8 +87,8 @@ public class CourseController(ICourseRepository cr, IMapper m) : Controller
             return StatusCode(500, "Erro interno");
         }
     }
-
-
+    
+    
     [HttpPatch("/course/{courseId}/user")]
     [ProducesResponseType(203)]
     public IActionResult AddUserToCourse([FromQuery] long userId, long courseId)
@@ -137,6 +137,26 @@ public class CourseController(ICourseRepository cr, IMapper m) : Controller
         {
             Console.WriteLine(error.Message + "\n\n\nErro ao atualizar curso");
             return BadRequest("Erro interno!");
+        }
+    }
+
+    [HttpDelete("{courseId}")]
+    [ProducesResponseType(204)]
+    public IActionResult DeleteCourse(long courseId)
+    {
+        try
+        {
+            _cr.DeleteCourse(courseId);
+            return NoContent();
+        }
+        catch (GenericDbError error)
+        {
+            return BadRequest(error.Message);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e + "\n\n\nErro ao remover curso");
+            return BadRequest("Erro interno");
         }
     }
 }

@@ -39,10 +39,12 @@ public class PostRepository(DataContext ctx, IMapper m, IUserRepository ur) : IP
     // pegar os de 1 user
     public ICollection<Post>? GetPostsFromUser(long userId)
     {
-        return [.. _context.Posts
-            .Where(p => p.UserId == userId)
-            .Include(p =>p.User)
-            ];
+        return
+        [
+            .. _context.Posts
+                .Where(p => p.UserId == userId)
+                .Include(p => p.User)
+        ];
     }
 
     public void GiveLike(long id)
@@ -50,7 +52,7 @@ public class PostRepository(DataContext ctx, IMapper m, IUserRepository ur) : IP
         var post = GetPostById(id);
         if (post == null)
             throw new GenericDbError("Post não encontrado");
-        
+
         post.Likes += 1;
         _context.Posts.Update(post);
         _context.SaveChanges();
@@ -60,7 +62,7 @@ public class PostRepository(DataContext ctx, IMapper m, IUserRepository ur) : IP
     {
         if (!_userRepository.UserExists(post.UserId))
             throw new GenericDbError("Usuário inexistente");
-            
+
         _context.Posts.Add(post);
 
         return _context.SaveChanges() > 0;
@@ -70,7 +72,6 @@ public class PostRepository(DataContext ctx, IMapper m, IUserRepository ur) : IP
     {
         var dbPost = _context.Posts
             .Where(p => p.Id == postId)
-
             .FirstOrDefault();
 
         if (dbPost == null)
@@ -95,5 +96,17 @@ public class PostRepository(DataContext ctx, IMapper m, IUserRepository ur) : IP
             throw new GenericDbError("Nada para atualizar");
 
         return dbPost;
+    }
+
+    public bool DeletePost(long postId)
+    {
+        var post = _context.Posts
+            .FirstOrDefault(p => p.Id == postId);
+
+        if (post == null)
+            throw new GenericDbError("Post não encontrado");
+
+        _context.Remove(post);
+        return _context.SaveChanges() > 0;
     }
 }

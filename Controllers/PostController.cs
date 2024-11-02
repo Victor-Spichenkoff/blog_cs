@@ -2,10 +2,12 @@
 using blog_c_.DTOs.FilterDtos;
 using blog_c_.DTOs.ModifyDtos;
 using blog_c_.Erros;
+using blog_c_.Helper;
 using blog_c_.Interfaces;
 using blog_c_.Models;
 using blog_c_.Models.Queries;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace blog_c_.Controllers;
 
@@ -22,12 +24,34 @@ public class PostController(IPostRepositoy pr, IUserRepository ur, IMapper m) : 
     [ProducesResponseType(typeof(ICollection<FilterPostDto>), 200)]
     public IActionResult GetFy([FromQuery] PaginationQuery paginationItens)
     {
-        var posts = _pr.GetPosts(paginationItens.Page, paginationItens.PageSize);
+        var fullData = _pr.GetPosts(paginationItens.Page, paginationItens.PageSize);
 
-        if (posts.Count == 0)
+        if (fullData == null || fullData.TotalCount == 0)
             return BadRequest("Isso é tudo pessoal...");
 
-        return Ok(posts);
+        
+        var filteredPosts = _mapper.Map<ICollection<FilterPostDto>>(fullData);
+        
+        var metadata = new
+        {
+            fullData.TotalCount,
+            fullData.PageSize,
+            fullData.CurrentPage,
+            fullData.TotalPages,
+            fullData.HasNext,
+            fullData.HasPrevious
+        };
+
+        // para enviar paginação + dados
+        var response = new
+        {
+            posts = filteredPosts,
+            pagination = metadata
+        };
+
+        Response.Headers.Append("X-Pagination", JsonConvert.SerializeObject(metadata));
+        
+        return Ok(fullData);
     }
 
 

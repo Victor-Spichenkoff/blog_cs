@@ -3,6 +3,7 @@ using blog_c_.Data;
 using blog_c_.DTOs.FilterDtos;
 using blog_c_.DTOs.ModifyDtos;
 using blog_c_.Erros;
+using blog_c_.Helper;
 using blog_c_.Interfaces;
 using blog_c_.Models;
 using Microsoft.EntityFrameworkCore;
@@ -26,14 +27,15 @@ public class PostRepository(DataContext ctx, IMapper m, IUserRepository ur) : IP
     }
 
     // Pegar fy
-    public ICollection<FilterPostDto> GetPosts(int page = 0, int pageSize = 2)
+    public PagedList<Post>? GetPosts(int page = 0, int pageSize = 2)
     {
-        var currentPagePosts = _context.Posts
-            .Skip(pageSize * page)
-            .Take(pageSize)
-            .ToList();
-
-        return _mapper.Map<ICollection<FilterPostDto>>(currentPagePosts);
+        return PagedList<Post>.ToPagedList
+        (
+            _context.Posts
+                .OrderBy(p => p.Id),
+            page,
+            pageSize
+        );
     }
 
     // pegar os de 1 user

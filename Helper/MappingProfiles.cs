@@ -16,6 +16,7 @@ public class MappingProfiles : Profile
         //filtro
         CreateMap<User, FilterUserDto>().ReverseMap();
         CreateMap<Post, FilterPostDto>().ReverseMap();
+        // CreateMap<Post, FilterPostDto>().ReverseMap();
         // Criação
         CreateMap<CreationUserDto, User>().ReverseMap();
         CreateMap<CreationUserMessageDto, User>().ReverseMap();

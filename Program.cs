@@ -46,6 +46,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    // coloquei só para dev, erro no 
+    adeploy:pp.MigrateDatabase();
 }
 
 app.UseHttpsRedirection();
@@ -54,5 +56,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MigrateDatabase();
+
 app.Run();

@@ -1,5 +1,5 @@
 ﻿# Usar uma imagem base oficial do .NET para build e publish
-FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 WORKDIR /app
 
 # Copiar os arquivos de projeto e restaurar as dependências
@@ -10,7 +10,7 @@ RUN dotnet restore
 RUN dotnet publish -c Release -o out
 
 # Usar uma imagem base menor para rodar a aplicação
-FROM mcr.microsoft.com/dotnet/aspnet:9.0
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build-env /app/out .
 

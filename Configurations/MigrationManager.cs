@@ -16,12 +16,13 @@ public static class MigrationManager
                 {
                     // atualizar o db
                     appContext.Database.Migrate();
-
+    
                     // fazer o seeding
                     var seeding = new Seeding(appContext);
-
-                    seeding.CreateAll();
-
+    
+                    // descomentar para fazer
+                    // seeding.CreateAll();
+    
                 }
                 catch (Exception ex)
                 {
@@ -31,7 +32,7 @@ public static class MigrationManager
                 }
             }
         }
-
+    
         return webApp;
     }
 }

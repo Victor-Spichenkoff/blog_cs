@@ -47,8 +47,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
     // coloquei só para dev, erro no 
-    adeploy:pp.MigrateDatabase();
+    app.MigrateDatabase();
 }
+
+var ress  = "syntax";
 
 app.UseHttpsRedirection();
 

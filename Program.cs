@@ -50,8 +50,6 @@ if (app.Environment.IsDevelopment())
     app.MigrateDatabase();
 }
 
-var ress  = "syntax";
-
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
